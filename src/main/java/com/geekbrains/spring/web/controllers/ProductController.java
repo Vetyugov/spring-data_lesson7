@@ -37,14 +37,7 @@ public class ProductController {
     }
 
     @GetMapping("/products/cost_between")
-    public List<Product> getAllStudentsBetween(@RequestParam(defaultValue = "-1") Integer min, @RequestParam(defaultValue = "-1") Integer max) {
-        if (min == -1 && max == -1) {
-            return productService.findAll();
-        } else if (min == -1) {
-            return productService.findAllLowCost(max);
-        } else if (max == -1) {
-            return productService.findAllHighCost(min);
-        }
+    public List<Product> getAllProductsBetween(@RequestParam(defaultValue = "0") Integer min, @RequestParam(defaultValue = "9999999") Integer max) {
         return productService.findAllBetween(min, max);
     }
 

@@ -22,10 +22,4 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
     @Query("select p from Product p where p.cost < :max AND p.cost> :min")
     List<Product> findAllBetween(Integer min, Integer max);
-
-    @Query("select p from Product p where p.cost < :max")
-    List<Product> findAllLowCost(Integer max);
-
-    @Query("select p from Product p where p.cost > :min")
-    List<Product> findAllHighCost(Integer min);
 }
