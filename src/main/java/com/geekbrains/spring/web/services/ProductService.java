@@ -37,10 +37,7 @@ public class ProductService {
         productRepo.deleteById(id);
     }
 
-    public Product saveProduct(String name, Integer cost) {
-        Product product = new Product();
-        product.setName(name);
-        product.setCost(cost);
+    public Product saveProduct(Product product) {
         return productRepo.save(product);
     }
 

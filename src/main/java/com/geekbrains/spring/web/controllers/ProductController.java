@@ -17,7 +17,7 @@ public class ProductController {
     }
 
     @GetMapping("/products")
-    public List<Product> getAllStudents() {
+    public List<Product> getAllProducts() {
         return productService.findAll();
     }
 
@@ -31,9 +31,9 @@ public class ProductController {
         productService.deleteById(id);
     }
 
-    @GetMapping("/new_product")
-    public void save(@RequestParam String name, @RequestParam Integer cost) {
-        productService.saveProduct(name, cost);
+    @PostMapping("/new_product")
+    public void save(@RequestBody Product product) {
+        productService.saveProduct(product);
     }
 
     @GetMapping("/products/cost_between")
