@@ -13,6 +13,26 @@
 </head>
 <body>
     <div class="container" ng-controller="indexController">
+
+        <form novalidate ng-submit="loadProducts()">
+            <div class="form-floating input-group-sm">
+                <input type="text" class="form-control" id="filterName" placeholder="" ng-model="filter.name_part">
+                <label for="filterName">Часть имени продукта</label>
+            </div>
+            <p></p>
+            <div class="form-floating input-group-sm">
+                <input type="number" class="form-control" id="filterMinScore" placeholder="" ng-model="filter.min_cost">
+                <label for="filterMinScore">Мин. стоимость</label>
+            </div>
+            <p></p>
+            <div class="form-floating input-group-sm">
+                <input type="number" class="form-control" id="filterMaxScore" placeholder="" ng-model="filter.max_cost">
+                <label for="filterMaxScore">Макс. стоимость</label>
+            </div>
+            <p></p>
+            <button class="btn btn-outline-warning btn-sm" style="width: 100%;" type="submit">Применить</button>
+        </form>
+
         <h3>Список продуктов</h3>
         <table class="table table-hover">
             <tr>
@@ -33,7 +53,7 @@
             </tbody>
         </table>
 
-        <button type="button" class="btn btn-info" ng-click="loadProducts()">Сбросить фильтр</button>
+        <button type="button" class="btn btn-info" ng-click="resetFilter()">Сбросить фильтр</button>
 
         <h3>Добавление продукта</h3>
         <form novalidate ng-submit="createProduct()">
@@ -49,9 +69,9 @@
         <p></p>
         <h3>Фильтрация</h3>
         <form novalidate ng-submit="filterProducts()">
-            <input class="form-control" type="number" placeholder="min" ng-model="filter.min">
+            <input class="form-control" type="number" placeholder="min" ng-model="filter.min_cost">
             <p></p>
-            <input class="form-control" type="number" placeholder="max" ng-model="filter.max">
+            <input class="form-control" type="number" placeholder="max" ng-model="filter.max_cost">
             <p></p>
             <button type="submit" class="btn btn-primary">Фильтровать</button>
         </form>
