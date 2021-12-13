@@ -2,6 +2,10 @@ package com.geekbrains.spring.web.services;
 
 import com.geekbrains.spring.web.entities.Product;
 import com.geekbrains.spring.web.repositories.ProductRepo;
+import com.geekbrains.spring.web.repositories.specifications.ProductsSpecifications;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +27,21 @@ public class ProductService {
         return productRepo.findById(id);
     }
 
-    /**
-     * @return получение всех товаров
-     */
-    public List<Product> findAll() {
-        return productRepo.findAll();
+    public Page<Product> find(Integer minCost, Integer maxCost, String partName, Integer page) {
+        Specification<Product> spec = Specification.where(null);
+        if (minCost != null) {
+            spec = spec.and(ProductsSpecifications.costGreaterOrEqualsThan(minCost));
+        }
+        if (maxCost != null) {
+            spec = spec.and(ProductsSpecifications.costLessThanOrEqualsThan(maxCost));
+        }
+        if (partName != null) {
+            spec = spec.and(ProductsSpecifications.nameLike(partName));
+        }
+
+        return productRepo.findAll(spec, PageRequest.of(page - 1, 5));
     }
+
 
     /**
      * @return удаление товара по id
@@ -41,7 +54,4 @@ public class ProductService {
         return productRepo.save(product);
     }
 
-    public List<Product> findAllBetween(Integer min, Integer max) {
-        return productRepo.findAllBetween(min, max);
-    }
 }

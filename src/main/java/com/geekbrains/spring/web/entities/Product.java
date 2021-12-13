@@ -15,6 +15,8 @@ public class Product {
     private String name;
     @Column(name = "cost")
     private Integer cost;
+    @Column(name = "info")
+    private String info;
 
     public Product() {
     }
@@ -41,5 +43,13 @@ public class Product {
 
     public void setCost(Integer cost) {
         this.cost = cost;
+    }
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
